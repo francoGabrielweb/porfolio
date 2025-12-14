@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil de Contacto </title>
+
+
+    
+    <style>
+  
+        :root {
+            --wc-bg-dark: #121214;
+            --wc-silver: #a8a8a8;
+            --wc-silver-dark: #4a4a4a;
+            --wc-gold: #cba874; 
+            --wc-magic-aura: rgba(205, 179, 128, 0.15); 
+        }
+
+      
+        body {
+            background-color: #0e0e10; 
+            color: var(--wc-silver);
+            font-family: "Cinzel", serif; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .witcher-card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 3em; 
+        }
+
+        .witcher-card {
+            position: relative;
+            width: 90vw; 
+            max-width: 28em; 
+            height: auto; 
+            min-height: 48em; 
+            
+            background-color: var(--wc-bg-dark);
+            border: 0.2em solid var(--wc-silver-dark);
+            font-size: 16px; 
+            font-family: "Cinzel", serif; 
+            color: var(--wc-silver);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0; 
+            box-sizing: border-box;
+            cursor: pointer;
+            overflow: hidden;
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s;
+
+          
+            background-image: radial-gradient(
+                circle at 50% 30%,
+                #2a2a2e,
+                var(--wc-bg-dark) 70%
+            ),
+            repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.1) 0,
+                rgba(0, 0, 0, 0.1) 2px,
+                transparent 2px,
+                transparent 4px
+            );
+
+            box-shadow:
+                0 1em 2em rgba(0, 0, 0, 0.8),
+                inset 0 0 2em rgba(0, 0, 0, 0.9);
+        }
+
+    
+        .witcher-card-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          
+     
+        }
+        
+     
+
+        .witcher-banner {
+            width: 100%;
+            height: 8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 120px;
+
+ 
+  background: #121212; 
+  background: linear-gradient(
+    135deg,
+    #121212 25%,
+    #1a1a1a 25%,
+    #1a1a1a 50%,
+    #121212 50%,
+    #121212 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 40px 40px;
+
+
+  animation: move 4s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+ 
+        
+
+        .witcher-avatar {
+            width: 9em; 
+            height: 9em;
+            border-radius: 50%;
+            border: 4px solid var(--wc-gold);
+            background-color: var(--wc-bg-dark);
+            position: absolute;
+            top: 5em; 
+            z-index: 10;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(203, 168, 116, 0.3);
+        }
+        
+        .witcher-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+        }
+
+
+ 
+        .witcher-card-title {
+            text-transform: uppercase;
+            letter-spacing: 0.2em; 
+            font-size: 1.5em; 
+            color: var(--wc-gold);
+            border-bottom: 1px solid var(--wc-silver-dark);
+            padding-bottom: 0.75em; 
+            width: 100%;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            margin-top: 0; 
+            font-weight: 900; 
+        }
+
+        .witcher-card-content > p {
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            color: #9ca3af; 
+            letter-spacing: 0.2em; 
+            margin-top: -1.25rem; 
+            margin-bottom: 1.5rem; 
+            text-align: center;
+        }
+        
+
+        .witcher-carousel-container {
+            width: 100%;
+            height: 140px; 
+            margin: 2.5em 0; 
+            border: 1px solid var(--wc-silver-dark);
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 300%; 
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: calc(100% / 3); 
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+       
+        .carousel-indicators {
+            position: absolute;
+            bottom: 8px; 
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px; 
+        }
+
+        .indicator-dot {
+            width: 10px; 
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicator-dot.active {
+            background-color: var(--wc-gold);
+        }
+  
+
+
+        .witcher-card-details {
+            margin-top: 2em; 
+            width: 100%;
+            font-size: 1.1em; 
+            line-height: 1.6;
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1.75em; 
+        }
+        
+        .witcher-card-stat {
+            display: block; 
+            text-align: center; 
+            text-decoration: none;
+            color: var(--wc-gold); 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            padding: 1.5em 1.5em; 
+            border: 2px solid var(--wc-gold); 
+            background-color: rgba(30, 30, 33, 0.5); 
+            box-shadow: 0 0 5px rgba(203, 168, 116, 0.2);
+            border-radius: 8px; 
+            text-transform: uppercase;
+            letter-spacing: 0.15em; 
+            margin: 0px 20px;
+        }
+        
+        .witcher-card-stat:hover {
+             color: #fff; 
+             background-color: rgba(30, 30, 33, 1);
+             box-shadow: 0 0 15px rgba(203, 168, 116, 0.7); 
+             transform: scale(1.02); 
+        }
+        
+    
+        .witcher-card:hover {
+            transform: translateY(-0.5em);
+            box-shadow: 0 1.5em 3em rgba(0, 0, 0, 0.9), 0 0 1.5em rgba(203, 168, 116, 0.1); 
+            border-color: var(--wc-gold);
+        }
+
+        .witcher-card:hover::before { opacity: 1; }
+        .witcher-card:hover .witcher-card-corner {
+            width: 90%; height: 90%; opacity: 1; border-color: rgba(203, 168, 116, 0.3);
+        }
+        .witcher-card:hover .witcher-card-title {
+            color: #fff; text-shadow: 0 0 10px var(--wc-gold);
+        }
+        .witcher-card:focus-visible {
+            outline: 2px solid var(--wc-gold); outline-offset: 4px;
+        }
+    </style>
+</head>
+<body class="main-body">
+
+ 
+    <div class="witcher-card-container">
+        
+    
+        <div class="witcher-card" tabindex="0">
+            
+      
+            <div class="witcher-card-corner top-left"></div>
+            <div class="witcher-card-corner top-right"></div>
+            <div class="witcher-card-corner bottom-left"></div>
+            <div class="witcher-card-corner bottom-right"></div>
+            
+    
+            <div class="witcher-banner"></div>
+
+          
+
+            <div class="witcher-avatar">
+
+            </div>
+
+  
+            <div class="witcher-card-content">
+
+      
+                <h2 class="witcher-card-title">
+                    Franco Web Art
+                </h2>
+                <br>
+                <p>
+                    desarrollador web full stack
+                </p>
+
+      
+
+                <div class="witcher-card-details">
+                    
+                    <a href="https://github.com/francoGabrielweb" target="_blank" class="witcher-card-stat">
+                        GITHUB
+                    </a>
+
+                    <a href="https://www.tiktok.com/@francoart.dev" target="_blank" class="witcher-card-stat">
+                         TIKTOK
+                    </a>
+                    <a href="https://www.instagram.com/_francoporres/" target="_blank" class="witcher-card-stat">
+                         INSTAGRAM
+                    </a>
+                 
+                    
+            
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+
+
+</body>
+</html>
